@@ -1,0 +1,9 @@
+<h1>Welcome to the PWA</h1>
+<label>The add to home screen popup will be generated on clicking the button for android devices</label><br>
+<label>For iOS the button click will show a alert popup on how to Add the app to home screen</label>
+<h3>Click the button below to generate popup</h3>
+  <button *ngIf="!_platform.IOS" (click)="installPwa()">
+    Add to home screen
+  </button>
+
+<router-outlet></router-outlet>
