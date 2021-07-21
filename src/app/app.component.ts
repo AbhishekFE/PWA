@@ -35,13 +35,12 @@ onbeforeinstallprompt(e) {
   }
 
   installPwa(): void {
-    // if (this._platform.isBrowser || this._platform.FIREFOX || this._platform.EDGE || this._platform.ANDROID) {
-    //   this.promptEvent?.prompt();
-    // }
-    // if (this._platform.IOS) {
-    //   alert('Add the site to home screen share -> Add to home screen')
-    // }
-    this.openDialog();
+    if (this._platform.isBrowser || this._platform.FIREFOX || this._platform.EDGE || this._platform.ANDROID) {
+      this.promptEvent?.prompt();
+    }
+    if (this._platform.IOS) {
+      this.openDialog();
+    }
   }
 
   openDialog(): void {
