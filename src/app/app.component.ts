@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
 import { Platform } from '@angular/cdk/platform';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { PopupComponent } from './popup/popup.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,7 @@ onbeforeinstallprompt(e) {
   this.showButton = true;
 }
 
-  constructor(private swUpdate: SwUpdate,  private _platform: Platform) {
+  constructor(private swUpdate: SwUpdate,  private _platform: Platform, public dialog: MatDialog) {
     swUpdate.available.subscribe(event => {
         window.location.reload();
     });
@@ -33,11 +35,20 @@ onbeforeinstallprompt(e) {
   }
 
   installPwa(): void {
-    if (this._platform.isBrowser || this._platform.FIREFOX || this._platform.EDGE || this._platform.ANDROID) {
-      this.promptEvent?.prompt();
-    }
-    if (this._platform.IOS) {
-      alert('Add the site to home screen share -> Add to home screen')
-    }
+    // if (this._platform.isBrowser || this._platform.FIREFOX || this._platform.EDGE || this._platform.ANDROID) {
+    //   this.promptEvent?.prompt();
+    // }
+    // if (this._platform.IOS) {
+    //   alert('Add the site to home screen share -> Add to home screen')
+    // }
+    this.openDialog();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
